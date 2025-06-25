@@ -1,0 +1,49 @@
+{% extends 'hire/base.html' %}
+{% block title %}Job Listings – JobHire{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4 fw-semibold text-center">💼 Explore Job Opportunities</h2>
+
+    <!-- 🔍 Search Form -->
+    <form method="get" class="row g-2 mb-5 justify-content-center">
+        <div class="col-md-8">
+            <input type="text" class="form-control form-control-lg" name="q"
+                   placeholder="🔍 Search by job title, company, or location"
+                   value="{{ query|default:'' }}">
+        </div>
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+        </div>
+    </form>
+
+    <!-- 🗂 Job Cards -->
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="job-title fw-bold">{{ job.title }}</h5>
+                        <p class="text-muted mb-1">{{ job.company }} – {{ job.location }}</p>
+                        <p class="mb-1"><span class="badge bg-info text-dark">Experience: {{ job.experience }}</span></p>
+                        <p class="mb-2"><strong>₹ {{ job.salary }}</strong></p>
+                        <p class="text-muted small">{{ job.description|truncatewords:20 }}</p>
+                    </div>
+                    <div class="text-end mt-2">
+                        <a href="{% url 'job_detail' job.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center">⚠️ No jobs found matching your search.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

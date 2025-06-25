@@ -1,0 +1,58 @@
+{% extends 'hire/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Post a New Job{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4">📌 Post a New Job Opening</h3>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="card p-4 shadow-sm">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Job Title</label>
+                {{ form.title|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Company</label>
+                {{ form.company|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                {{ form.location|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Experience</label>
+                {{ form.experience|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Salary</label>
+                {{ form.salary|add_class:"form-control" }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                {{ form.description|add_class:"form-control" }}
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">🚀 Post Job</button>
+            </div>
+        </form>
+    </div>
+
+    <a href="{% url 'hr_dashboard' %}" class="btn btn-link mt-3">← Back to Dashboard</a>
+</div>
+{% endblock %}

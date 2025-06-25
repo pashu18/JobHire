@@ -1,0 +1,36 @@
+{% extends 'hire/base.html' %}
+{% block title %}HR Dashboard{% endblock %}
+{% block content %}
+
+<h3 class="mb-4">📊 HR Dashboard</h3>
+
+<table class="table table-hover shadow-sm bg-white rounded">
+  <thead class="table-dark">
+    <tr>
+      <th>Job</th>
+      <th>Company</th>
+      <th>Location</th>
+      <th>Posted</th>
+      <th>Apps</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for job in jobs %}
+    <tr>
+      <td>{{ job.title }}</td>
+      <td>{{ job.company }}</td>
+      <td>{{ job.location }}</td>
+      <td>{{ job.posted_on|date:"Y-m-d" }}</td>
+      <td>{{ job.app_count }}</td>
+      <td>
+        <a href="{% url 'view_applications' job.id %}" class="btn btn-sm btn-outline-primary">View</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'post_job' %}" class="btn btn-success mt-3">+ Post New Job</a>
+
+{% endblock %}

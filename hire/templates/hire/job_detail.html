@@ -1,0 +1,14 @@
+{% extends 'hire/base.html' %}
+{% block title %}{{ job.title }} – Job Details{% endblock %}
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h3>{{ job.title }}</h3>
+    <p><strong>Company:</strong> {{ job.company }}</p>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+    <p><strong>Experience:</strong> {{ job.experience }}</p>
+    <p><strong>Salary:</strong> ₹{{ job.salary }}</p>
+    <hr>
+    <p>{{ job.description }}</p>
+    <a href="{% url 'apply_job' job.id %}" class="btn btn-primary mt-3">Apply Now</a>
+</div>
+{% endblock %}

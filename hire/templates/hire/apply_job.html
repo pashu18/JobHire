@@ -1,0 +1,29 @@
+{% extends 'hire/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Apply – {{ job.title }}{% endblock %}
+{% block content %}
+
+
+<div class="card shadow p-4">
+    <h3 class="mb-3 text-primary">Apply for {{ job.title }} at {{ job.company }}</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">👤 Full Name</label>
+            {{ form.name|add_class:"form-control form-control-lg" }}
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">📧 Email</label>
+            {{ form.email|add_class:"form-control form-control-lg" }}
+        </div>
+        <div class="mb-3">
+            <label for="id_resume" class="form-label">📎 Resume</label>
+            {{ form.resume|add_class:"form-control form-control-lg" }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg mt-3">🚀 Submit Application</button>
+    </form>
+</div>
+
+{% endblock %}
+
+
