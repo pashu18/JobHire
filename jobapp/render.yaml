@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: jobhire
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn jobapp.wsgi:application"
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
+        value: False
+    buildFilter:
+      paths:
+        - jobapp/*
+        - hire/*
+        - requirements.txt
+    preDeployCommand: "python manage.py migrate"
